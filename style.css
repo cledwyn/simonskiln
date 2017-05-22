@@ -1,0 +1,43 @@
+html {
+    font-family: helvetica;
+    font-size-adjust: auto;
+}
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+}
+.topcorner{
+   position:absolute;
+   top:0;
+   left:0;
+   padding: 15px;
+   cursor: pointer;
+}
+h1 {
+  font-size: 4em;
+    left: 0;
+    line-height: 2em;
+    /*margin-top: -1em;*/
+    position: absolute;
+    text-align: center;
+    top: 30%;
+    width: 100%;
+}
+h2 {  
+    left: 0;
+    line-height: 2em;
+    text-align: center;
+    width: 100%;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover { 
+   color: #242424;
+}
