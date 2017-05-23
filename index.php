@@ -6,19 +6,19 @@ include 'settings.php';
 <head>
     <meta charset="UTF-8">
     <title>Simon's Kiln Page</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css?v=2">
 
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
 </head>
 <body>
 
-
-
 <div id="container" ></div>
 
-<h2>
+<h2 id="templabel">
 <?php
 $sql = "SELECT *, ADDTIME(ts,'0 2:00:00') as tss FROM logger where field = 't' order by ts desc limit 1";
 $result = $conn->query($sql);
@@ -33,89 +33,19 @@ if ($result->num_rows > 0) {
 }
 ?>
 </h2>
+<div id="lastupdated"></div>
 
-
-
-<div class="topcorner" onclick="window.location.href = '/'">
-<img src="mug.svg" alt="about" style="height: 15px">
+<div class="topcorner" onclick="window.location.href = 'https://github.com/cledwyn/simonskiln'">
+    <img src="img/Octocat.jpg" alt="about" style="height: 15px">
 </div>
 
-<script>
-Highcharts.chart('container', {
-    chart: {
-        type: 'spline'
-    },
-    title: {
-        text: 'Mill Creek Pottery Kiln Temp'
-    },
-    subtitle: {
-        text: 'Data Logging brought to you by chewing gum and bailing wire.'
-    },
-    xAxis: {
-        type: 'datetime',
-        dateTimeLabelFormats: { // don't display the dummy year
-            month: '%e. %b',
-            year: '%b'
-        },
-        title: {
-            text: 'Date'
-        }
-    },
-    yAxis: {
-        title: {
-            text: 'Kiln Temp (F)'
-        },
-        // min: 0
-    },
-    tooltip: {
-        headerFormat: '<b>{series.name}</b><br>',
-        pointFormat: '{point.x:%b %e %I:%M %p}: {point.y:.0f} deg F'
-    },
+<script src="script.js"></script>
 
-    plotOptions: {
-        spline: {
-            marker: {
-                enabled: true
-            }
-        }
-    },
+<div style="width: 100%;display: flex;position: fixed;align-items: center;justify-content: center;">
+<blockquote class="instagram-media" data-instgrm-captioned data-instgrm-version="7" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:8px;"> <div style=" background:#F8F8F8; line-height:0; margin-top:40px; padding:50.0% 0; text-align:center; width:100%;"> <div style=" background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAMUExURczMzPf399fX1+bm5mzY9AMAAADiSURBVDjLvZXbEsMgCES5/P8/t9FuRVCRmU73JWlzosgSIIZURCjo/ad+EQJJB4Hv8BFt+IDpQoCx1wjOSBFhh2XssxEIYn3ulI/6MNReE07UIWJEv8UEOWDS88LY97kqyTliJKKtuYBbruAyVh5wOHiXmpi5we58Ek028czwyuQdLKPG1Bkb4NnM+VeAnfHqn1k4+GPT6uGQcvu2h2OVuIf/gWUFyy8OWEpdyZSa3aVCqpVoVvzZZ2VTnn2wU8qzVjDDetO90GSy9mVLqtgYSy231MxrY6I2gGqjrTY0L8fxCxfCBbhWrsYYAAAAAElFTkSuQmCC); display:block; height:44px; margin:0 auto -44px; position:relative; top:-22px; width:44px;"></div></div> <p style=" margin:8px 0 0 0; padding:0 4px;"> <a href="https://www.instagram.com/p/BUagBqKACv-/" style=" color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;" target="_blank">Amazing Friend. My buddy @lloydlentz and I have been fiddling with a data logging cellular pyrometer. We just finally got it all hooked it up three days into our workshop firing. Its held together with hen&#39;s teeth and macguyver juice. What this means is you can go to the link in my profile SimonsKiln.com and follow along. The pyrometer is located in the front firebox. Though it is reading around 1900 we are holding it at cone 8 in the front. I am totally excited about this new toy. @lloydlentz is a steely eyed missile man. The next firing we will be able to graph the front middle and rear of the big kiln. Visit the site, and follow along. @treverbubba @paulstokstad @cartersclay @jacobmeer @ianjconnors are all posting from the workshop. #macguyver #woodfire #mca2017 #dataloggingpyro #amazingfriends</a></p> <p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">A post shared by Simon Levin (@woodfire) on <time style=" font-family:Arial,sans-serif; font-size:14px; line-height:17px;" datetime="2017-05-23T00:04:14+00:00">May 22, 2017 at 5:04pm PDT</time></p></div></blockquote> 
+</div>
 
-    series: [{
-        name: 'WorkShop Firing 2017 - Mill Creek Pottery',
-        // Define the data points. All series have a dummy year
-        // of 1970/71 in order to be compared on the same x axis. Note
-        // that in JavaScript, months start at 0 for January, 1 for February etc.
-        data: [
-        <?php
-$sql = "SELECT *, ADDTIME(ts,'0 2:00:00') as tss FROM logger where field = 't' and concat('',val * 1) = val  and ts > '2017-05-20' order by ts desc";
-$result = $conn->query($sql);
+<script async defer src="//platform.instagram.com/en_US/embeds.js"></script>
 
-if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {       
-        // Split timestamp into [ Y, M, D, h, m, s ]
-        $t = preg_split("/[- :]/", $row["tss"]);
-        echo "[Date.UTC(".$t[0].", ".((int)$t[1]-1).", ".(int)$t[2].", ".(int)$t[3].", ".(int)$t[4]."), ".$row["val"]."],\n";
-    }
-} else {
-    echo "0 results";
-}
-$conn->close();
-?>
-        ]
-    }]
-});
-</script>
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-48607929-4', 'auto');
-  ga('send', 'pageview');
-
-</script>
 </body>
 </html>

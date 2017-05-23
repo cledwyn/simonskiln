@@ -41,3 +41,9 @@ a {
 a:hover { 
    color: #242424;
 }
+
+div#lastupdated {
+    width: 100%;
+    text-align: center;
+    font-size: x-small;
+}
