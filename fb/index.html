@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>
+      
+
+  </title>
+</head>
+<body>
+    <div id="container"></div>
+
+<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBI6R8sVevfH7BRenzNJl8adVqk0-n7c6g",
+    authDomain: "pyrologger-1494215723717.firebaseapp.com",
+    databaseURL: "https://pyrologger-1494215723717.firebaseio.com",
+    projectId: "pyrologger-1494215723717",
+    storageBucket: "pyrologger-1494215723717.appspot.com",
+    messagingSenderId: "994783014875"
+  };
+  firebase.initializeApp(config);
+
+// Shortcuts to DOM Elements.
+var containerDiv = document.getElementById('container');
+    
+  // Get a reference to the database service
+//var database = firebase.database();
+
+var commentsRef = firebase.database().ref('logger/510038000c51353432393339/');
+// Retrieve new posts as they are added to Firebase
+commentsRef.on("child_added", function(data) {
+  var dataEvent = data.val();
+  
+  containerDiv.innerText = dataEvent.data;
+  
+  console.log(dataEvent);
+  
+});
+</script>
+
+</body>
+</html>
