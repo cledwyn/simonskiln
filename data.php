@@ -13,8 +13,8 @@ if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {       
         // Split timestamp into [ Y, M, D, h, m, s ]
-        $t = preg_split("/[- :]/", $row["tss"]);
-        echo "[Date.UTC(".$t[0].", ".((int)$t[1]-1).", ".(int)$t[2].", ".(int)$t[3].", ".(int)$t[4]."), ".$row["val"]."],\n";
+        $t = preg_split("/[- :]/", $row["tss"]); // use tss to add 2 hours from pacific TZ
+        echo "[Date.UTC(".$t[0].", ".((int)$t[1]-1).", ".(int)$t[2].", ".(int)$t[3].", ".(int)$t[4].",7,0), ".$row["val"]."],\n";
     }
 } else {
     echo "0 results";

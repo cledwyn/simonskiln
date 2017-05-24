@@ -1,4 +1,3 @@
-
 // Initialize Firebase
 var config = {
 	apiKey: "AIzaSyBI6R8sVevfH7BRenzNJl8adVqk0-n7c6g",
@@ -21,7 +20,8 @@ Date.prototype.addHours = function(h) {
 var containerDiv = document.getElementById('container');
 var tempLabel = document.getElementById('templabel');
 
-
+// It's way faster to do the initial data load from MySql than from Firebase.  
+// Load the data 
 $.getJSON('data.php?callback=?', function (data) {
 
 	Highcharts.chart('container', {
@@ -90,11 +90,7 @@ $.getJSON('data.php?callback=?', function (data) {
 	});
 }); 
 
-
-
-
 $(function() {
-   
 	// Get a reference to the database service
 	//var database = firebase.database();
 
@@ -103,30 +99,19 @@ $(function() {
 	commentsRef.limitToLast(1).on("child_added", function(data) {
 		var dataEvent = data.val();
 		tempLabel.innerText = dataEvent.data + " degrees";
+		var dt = new Date(dataEvent.time);
+		$("#lastupdated").text(dt.toLocaleString("en-US", {timeZone: "America/Chicago"}));
 		$("#templabel").fadeOut(500).fadeIn(100);
-		var t = dataEvent.time.split(/[- :T]/);
-		var d = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]));
-		console.log(d);
-//        $("#lastupdated").text(d.toUTCString());
-		$("#lastupdated").text(d.addHours(5).toLocaleString("en-US", {timeZone: "America/Chicago"}));
-		$("#templabel").fadeOut(500).fadeIn(100);
-		$("#lastupdated").fadeOut(500).fadeIn(100);
-		// $('#container').highcharts().series[0].addPoint({
-		//     //x: new Date(dataEvent.time),
-		//     x: d,
-		//     y: dataEvent.data
-		// }, false);
-
-		// // added points; redraw
-		// $('#container').highcharts().redraw();
-
-	  
-	  console.log(dataEvent);
-	  
+		$("#lastupdated").fadeOut(500).fadeIn(100);		
+		if (!isNaN(dataEvent.data)){  //Only add the data if it is a number
+			var pt = {
+				x: dt.addHours(-5),
+				y: parseFloat(dataEvent.data)
+			}
+			$('#container').highcharts().series[0].addPoint(pt, true);
+		}
 	});
 });
-
-
 
 // Analytics
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
