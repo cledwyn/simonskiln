@@ -37,7 +37,7 @@ $.getJSON('data.php?callback=?', function (data) {
 		xAxis: {
 			type: 'datetime',
 			dateTimeLabelFormats: { // don't display the dummy year
-				month: '%e. %b',
+				month: '%b %e',
 				year: '%b'
 			},
 			title: {
