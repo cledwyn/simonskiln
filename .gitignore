@@ -3,3 +3,4 @@ vendor/
 test/
 script2.js
 test.php
+.htaccess
