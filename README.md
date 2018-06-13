@@ -3,8 +3,6 @@
 UI page for the Data Logger project.  I will have the data up soonish about the parts there were used.
 
 ## Particle.io code
-https://go.particle.io/shared_apps/59259b9254beaf9934000bb8
-or
 [pyrologger.ino](pyrologger.ino)
 
 ## To make this website
