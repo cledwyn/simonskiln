@@ -6,6 +6,7 @@ $dbname = "YOURDBNAME";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
+$dbh = new PDO('mysql:host=$servername;dbname=$dbname', $user, $pass);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

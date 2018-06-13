@@ -16,12 +16,13 @@ if($data){
         $val = $_POST['data'];
         $coreid = $_POST['coreid'];
         //Log the data into MySQL
-        $sql = "Insert into logger(field,val,coreid) values ('$fld','$val','$coreid')";
-        if ($conn->query($sql) === TRUE) {
-            echo $sql;
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
+        //$sql = "Insert into logger(field,val,coreid) values ('$fld','$val','$coreid')";
+        //use prepared statement in PDO syntax to avoid sql injections
+        $stmt = $dbh->prepare("INSERT INTO logger(field,val,coreid) values (:field, :value, :coreid)");
+        $stmt->bindParam(':field', $fld);
+        $stmt->bindParam(':value', $val);
+        $stmt->bindParam(':coreid', $coreid);
+        $stmt->execute();
 
         //Log the data into Firebase
         $firebase = new \Firebase\FirebaseLib(DEFAULT_URL, DEFAULT_TOKEN);
