@@ -3,7 +3,7 @@
 UI page for the Data Logger project.  I will have the data up soonish about the parts there were used.
 
 ## Particle.io code
-https://go.particle.io/shared_apps/59259b9254beaf9934000bb8
+[pyrologger.ino](pyrologger.ino)
 
 ## To make this website
 
@@ -12,6 +12,7 @@ https://go.particle.io/shared_apps/59259b9254beaf9934000bb8
  * should be good.  Firebase will read from anywhere.
 
 ## Setup the Particle WEBHOOK
+In your particle.io config section.  Add a webhook to point to your [pyrologger.php](pyrologger.php) endpoint.
 similar to this:
 
 ![settings](https://github.com/lloydlentz/simonskiln/raw/master/img/particle-webhook-settings.png)
