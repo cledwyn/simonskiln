@@ -6,7 +6,7 @@ if(isset($_GET["callback"])) {
     $callback = $_GET["callback"]; 
 }
 echo $callback . "([\n";
-$sql = "SELECT *, ADDTIME(ts,'0 2:00:00') as tss FROM logger where field = 't' and concat('',val * 1) = val  and ts > '2017-05-20' order by ts";
+$sql = "SELECT *, ADDTIME(ts,'0 2:00:00') as tss FROM logger where field = 't' and coreid = '510038000c51353432393339' and concat('',val * 1) = val  and ts  between '2017-09-08' and '2017-09-30' order by ts";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
