@@ -1,8 +1,6 @@
 <?php
 include 'settings.php';
 
-$firebase = new \Firebase\FirebaseLib(DEFAULT_URL, DEFAULT_TOKEN);
-
 $data = $_POST["data"];
 
 if($data){
@@ -26,6 +24,7 @@ if($data){
         }
 
         //Log the data into Firebase
+        $firebase = new \Firebase\FirebaseLib(DEFAULT_URL, DEFAULT_TOKEN);
         $dateTime = new DateTime();
         $dateTimeZone = new DateTimeZone('America/Chicago');        
         $dateTime->setTimeZone($dateTimeZone);
