@@ -12,6 +12,7 @@ UI page for the Data Logger project.  I will have the data up soonish about the 
  * should be good.  Firebase will read from anywhere.
 
 ## Setup the Particle WEBHOOK
+In your particle.io config section.  Add a webhook to point to your [pyrologger.php](pyrologger.php) endpoint.
 similar to this:
 
 ![settings](https://github.com/lloydlentz/simonskiln/raw/master/img/particle-webhook-settings.png)
